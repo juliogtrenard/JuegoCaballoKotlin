@@ -3,4 +3,6 @@
     <string name="banner_superior">Soy un banner superior</string>
     <string name="banner_inferior">Soy un banner inferior</string>
     <string name="titulo_aplicacion">Juega al ajedrez</string>
+    <string name="nivel">Nivel</string>
+    <string name="cero">0</string>
 </resources>
