@@ -42,6 +42,18 @@
             android:layout_margin="4dp"
             android:orientation="vertical">
 
+            <!-- Título del juego -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@color/white"
+                android:textAlignment="center"
+                android:textColor="@color/fondo_tile"
+                android:fontFamily="@font/angkor_regular"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                android:text="@string/titulo_aplicacion"/>
         </LinearLayout>
     </ScrollView>
 

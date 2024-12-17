@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="fondo_app">#F1E9E9</color>
     <color name="constrast_data">#B22222</color>
+    <color name="fondo_tile">#EB120903</color>
 </resources>
