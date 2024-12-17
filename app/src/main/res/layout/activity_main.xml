@@ -76,6 +76,198 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:text="@string/cero"/>
+
+            <!-- Cuadrados con información -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <!-- Campo movimientos -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- Texto de movimientos -->
+                    <TextView
+                        android:id="@+id/movimientosTitulo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_item_top"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="@string/movimientosTitulo"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+
+                    <!-- Movimientos restantes -->
+                    <TextView
+                        android:id="@+id/movimientosDatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bg_item_bottom"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="@string/cero"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+
+                <!-- Campo tiempo -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- texto de tiempo -->
+                    <TextView
+                        android:id="@+id/tiempoTitulo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_item_top"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="@string/tiempoTitulo"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+
+                    <!-- Tiempo transcurrido -->
+                    <TextView
+                        android:id="@+id/tiempoDatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bg_item_bottom"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="@string/tiempo"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+
+                <!-- Campo vidas -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- Texto de vidas -->
+                    <TextView
+                        android:id="@+id/vidasTitulo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_item_top_contraste"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="@string/vidasTitulo"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+
+                    <!-- Numero de vidas restantes -->
+                    <TextView
+                        android:id="@+id/vidasDato"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bg_item_bottom_contraste"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="@string/cero"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+
+
+                <!-- Campo opciones -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- Texto de opciones -->
+                    <TextView
+                        android:id="@+id/opcionesTitulo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_item_top"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="@string/opcionesTitulo"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+
+                    <!-- Numero de opciones disponibles -->
+                    <View
+                        android:id="@+id/vNuevoBonus"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:background="@color/constrast_data"
+                        android:translationY="-8dp" />
+
+                    <!-- Contenedor datos bonus -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:background="@drawable/bg_item_bottom"
+                        android:translationY="-8dp"
+                        android:orientation="horizontal">
+
+                        <!-- Texto de opciones restantes-->
+                        <TextView
+                            android:id="@+id/opcionesDato"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/cero"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"/>
+
+                        <!-- Texto de bonus disponibles -->
+                        <TextView
+                            android:id="@+id/bonusDato"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="10dp"
+                            android:text=""
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

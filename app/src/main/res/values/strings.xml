@@ -5,4 +5,9 @@
     <string name="titulo_aplicacion">Juega al ajedrez</string>
     <string name="nivel">Nivel</string>
     <string name="cero">0</string>
+    <string name="movimientosTitulo">Moves</string>
+    <string name="tiempoTitulo">Tiempo</string>
+    <string name="vidasTitulo">Vidas</string>
+    <string name="opcionesTitulo">Opciones</string>
+    <string name="tiempo">00:00</string>
 </resources>
