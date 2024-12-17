@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlScreen"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo_app">
+
+    <!-- Banner superior -->
+    <LinearLayout
+        android:id="@+id/llBannerSuperior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvBannerSuperior"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/constrast_data"
+            android:text="@string/banner_superior"
+            android:textAlignment="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <!-- Cuerpo del juego -->
+    <ScrollView
+        android:id="@+id/svJuego"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llBannerSuperior"
+        android:paddingBottom="40dp">
+
+        <!-- Elementos del juego -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Banner inferior-->
+    <LinearLayout
+        android:id="@+id/llBannerInferior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvBannerInferior"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/constrast_data"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:text="@string/banner_inferior"/>
+    </LinearLayout>
+</RelativeLayout>

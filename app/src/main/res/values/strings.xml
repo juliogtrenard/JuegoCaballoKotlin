@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MoverCaballo</string>
+    <string name="banner_superior">Soy un banner superior</string>
+    <string name="banner_inferior">Soy un banner inferior</string>
+</resources>
