@@ -2,6 +2,8 @@ package es.juliogtrenard.movercaballo
 
 import android.graphics.Point
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
@@ -10,6 +12,7 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     /**
@@ -74,11 +77,37 @@ class MainActivity : AppCompatActivity() {
      */
     private var jugando = true
 
+    /**
+     * Con esto podremos controlar el tiempo de la aplicación
+     */
+    private var mHandler: Handler? = null
+
+    /**
+     * Los segundos pasados
+     */
+    private var tiempoEnSegundos = 0L
+
+    /**
+     * El cronómetro de la partida
+     */
+    private var cronometro: Runnable = object: Runnable {
+        override fun run() {
+            try{
+                tiempoEnSegundos ++
+                actualizarReloj(tiempoEnSegundos)
+            } finally {
+                mHandler!!.postDelayed(this,1000L)
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         inicializarJuego()
+
+        iniciarJuego()
     }
 
     /**
@@ -90,6 +119,184 @@ class MainActivity : AppCompatActivity() {
         // Ocultar mensaje de vidas y nivel
         hideMessage()
 
+    }
+
+    /**
+     * Control de inicio del juego
+     */
+    private fun iniciarJuego() {
+        jugando = true
+
+        // Resetear el tablero
+        resetTablero()
+
+        // Limpiar el tablero entero poniendo el fondo correcto a todas ellas
+        limpiarTablero()
+
+        // Posicionamiento aleatorio del caballo
+        setFirstPosition()
+
+        resetTime()
+        startTime()
+    }
+
+    /**
+     * De parar el reloj
+     */
+    private fun resetTime(){
+        mHandler?.removeCallbacks(cronometro)
+        tiempoEnSegundos = 0
+
+        // Pones los segundos del imageview cronometro a cero
+        var tv = findViewById<TextView>(R.id.tiempoDatos)
+        tv.text = "00:00"
+    }
+
+    /**
+     * Lanza el cronómetro
+     */
+    private fun startTime(){
+        // Lanzamos el cronómetro
+        mHandler = Handler(Looper.getMainLooper())
+        cronometro.run()
+    }
+
+    /**
+     * Actualiza el reloj
+     */
+    private fun actualizarReloj(tiempo: Long) {
+        // Leo el tiempo
+        val tiempoFormateado = getTiempoFormateado(tiempo*1000)
+
+        // Recupero el image View
+        val tv = findViewById<TextView>(R.id.tiempoDatos)
+
+        // Asignación y terminado
+        tv.text = tiempoFormateado
+    }
+
+    /**
+     * Devuelve el tiempo en un formato legible para personas
+     */
+    private fun getTiempoFormateado(ms: Long): String {
+        var milisegundos = ms
+
+        // Ya hay una función que cambia milisegundos a otras unidades de tiempo
+        val minutos = TimeUnit.MILLISECONDS.toMinutes(milisegundos)
+        milisegundos -= TimeUnit.MINUTES.toMillis(minutos)
+        val segundos = TimeUnit.MILLISECONDS.toSeconds(milisegundos)
+
+        // Devolvemos el string formateado
+        return "${if (minutos < 10) "0" else  ""}:$minutos:" +
+                "${if (segundos < 10)"0" else  ""}$segundos"
+    }
+
+    /**
+     * Limpia todas las casillas y les da el background correcto
+     */
+    private fun limpiarTablero() {
+        // Image view temporal
+        var iv : ImageView
+
+        // Recojo las propiedades del color CeldaNegra y Celda Blanca
+        val colorBlack = ContextCompat.getColor(this,
+            resources.getIdentifier(colorCeldaNegra, "color",packageName))
+
+        val colorWhite = ContextCompat.getColor(this,
+            resources.getIdentifier(colorCeldaBlanca, "color",packageName))
+
+        // Recorremos el tablero
+        for (i in 0..7)
+            for (j in 0..7) {
+                // Recupero la celda
+                iv = findViewById(resources.getIdentifier("ivc$i$j", "id", packageName))
+
+                // Reseteo la imagen
+                iv.setImageResource(0)
+
+                // Si al mirar color era negra, fondo negro, si no, fondo blanco
+                if (mirarColor(i,j) == "negra")  iv.setBackgroundColor(colorBlack)
+                else iv.setBackgroundColor(colorWhite)
+            }
+    }
+
+    /**
+     * Deveulve el tablero al estado inicial
+     * cero para ningún caballo
+     * uno para cuando hay un caballo
+     * dos es un bonus
+     * nueve es una opción de movimiento
+     */
+    private fun resetTablero() {
+        tablero = arrayOf(
+            intArrayOf(0,0,0,0,0,0,0,0),
+            intArrayOf(0,0,0,0,0,0,0,0),
+            intArrayOf(0,0,0,0,0,0,0,0),
+            intArrayOf(0,0,0,0,0,0,0,0),
+            intArrayOf(0,0,0,0,0,0,0,0),
+            intArrayOf(0,0,0,0,0,0,0,0),
+            intArrayOf(0,0,0,0,0,0,0,0),
+            intArrayOf(0,0,0,0,0,0,0,0),
+            intArrayOf(0,0,0,0,0,0,0,0),
+            intArrayOf(0,0,0,0,0,0,0,0),
+        )
+    }
+
+    /**
+     * Este evento es llamado desde el layout cuando se pulsa una celda
+     * @param v vista que ha generado el evento
+     */
+    fun checkCellClicked(v: View){
+        // Lee que etiqueta tiene para averiguar su posición
+        val posicion = v.tag.toString()
+
+        // De ese tag vamos a sacar el primer número como x
+        // y de ese tag vamos a sacar el segundo número como y
+        val x = posicion.substring(1,2).toInt()
+        val y = posicion.substring(2,3).toInt()
+
+        // Habrá que indicar que se ha pulsado
+        checkCell(x,y)
+    }
+
+    /**
+     * Mira si es un movimiento en L
+     * Mira si la celda esta pulsada anteriormente
+     * si tenía un uno en esa posocion devuelve true
+     * su había un cero en esa posición devuelve un false
+     */
+    private fun checkCell(x: Int, y: Int) {
+        var checkTrue = true
+        if (checkMovement) {
+
+            val difX = x -cellSelected_x
+            val difY = y -cellSelected_y
+
+            checkTrue = false
+
+            // Comprueba el movimiento en L para el caballo, con valor absoluto era más corto
+            // computacionalmente más lento
+            if ( difX == 1 && difY == 2) checkTrue = true
+            if ( difX == 1 && difY == -2) checkTrue = true
+            if ( difX == 2 && difY == 1) checkTrue = true
+            if ( difX == 2 && difY == -1) checkTrue = true
+            if ( difX == -1 && difY == 2) checkTrue = true
+            if ( difX == -1 && difY == -2) checkTrue = true
+            if ( difX == -2 && difY == 1) checkTrue = true
+            if ( difX == -2 && difY == -1) checkTrue = true
+        }
+        else
+        {
+            if (tablero[x][y] != 1) {
+                // Nos vale el movimiento
+                bonus--
+                val tvBonusDato = findViewById<TextView>(R.id.bonusDato)
+                tvBonusDato.text = "  +" + bonus.toString()
+                if (bonus==0)   tvBonusDato.text =""
+            }
+        }
+        if (tablero[x][y] == 1) checkTrue = false
+        if (checkTrue) selectCell(x,y)
     }
 
     /**
