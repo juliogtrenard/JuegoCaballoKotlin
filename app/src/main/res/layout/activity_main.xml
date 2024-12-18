@@ -993,6 +993,34 @@
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="70sp"/>
+
+                    <!-- Un boton en la ventana de juego -->
+                    <TextView
+                        android:id="@+id/tvMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:layout_marginTop="30dp"
+                        android:paddingTop="10dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_title_top"
+                        android:textSize="25sp"
+                        android:shadowRadius="8"
+                        android:shadowColor="@color/black"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"
+                        android:text="@string/next"/>
+
+                    <!-- Cierre del boton en la ventana de juego -->
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:layout_marginBottom="30dp"
+                        android:src="@drawable/compartir"
+                        android:background="@drawable/bg_title_bottom"/>
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>

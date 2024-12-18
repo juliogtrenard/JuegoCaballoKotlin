@@ -12,4 +12,5 @@
     <string name="tiempo">00:00</string>
     <string name="celda">Celda</string>
     <string name="una_vida">1 vida</string>
+    <string name="next">Next</string>
 </resources>
